@@ -1,7 +1,7 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import * as esbuild from 'esbuild-wasm';
 import { useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
 import CodeEditor from './components/code-editor';
@@ -35,7 +35,7 @@ const App = () => {
       write: false,
       plugins: [unpkgPathPlugin(), fetchPlugin(input)],
       define: {
-        'process.env.NODE_ENV': '"production"',
+        // 'process.env.NODE_ENV': '"production"',
         global: 'window',
       },
     });
@@ -83,4 +83,6 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+createRoot(document.getElementById('root') as HTMLElement).render(
+    <App/>
+)
